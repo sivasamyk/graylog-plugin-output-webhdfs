@@ -232,10 +232,10 @@ public class WebHDFSOutput implements MessageOutput {
 
             configurationRequest.addField(new TextField(
                             CK_FILE,
-                            "File",
+                            "File path",
                             "",
-                            "HDFS path of file to write messages." +
-                                    "Accepts message fields like /var/${source}",
+                            "Path of file to write messages." +
+                                    "Accepts message fields like ${source} or date formats like %Y_%m_%d_%H_%M",
                             ConfigurationField.Optional.NOT_OPTIONAL)
             );
 
@@ -250,17 +250,10 @@ public class WebHDFSOutput implements MessageOutput {
             configurationRequest.addField(new NumberField(
                             CK_FLUSH_INTERVAL,
                             "Flush Interval",
-                            60,
-                            "Flush interval in seconds. Recommended for high throughput outputs",
+                            0,
+                            "Flush interval in seconds. Recommended for high throughput outputs. O for immediate update",
                             ConfigurationField.Optional.NOT_OPTIONAL)
             );
-
-//            configurationRequest.addField(new BooleanField(
-//                            CK_APPEND,
-//                            "Append",
-//                            true,
-//                            "Enable append to existing files in HDFS")
-//            );
 
             return configurationRequest;
         }
