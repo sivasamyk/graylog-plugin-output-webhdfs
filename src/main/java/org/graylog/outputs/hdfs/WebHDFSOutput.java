@@ -41,7 +41,7 @@ public class WebHDFSOutput implements MessageOutput {
     private static final String FIELD_SEPARATOR = " | ";
     private Configuration configuration;
     private AtomicBoolean isRunning = new AtomicBoolean(false);
-    private String configHadoopPath;
+    private String fileToWrite;
     private String messageFormat;
     private long flushIntervalInMillis;
     //private boolean append;
@@ -55,8 +55,6 @@ public class WebHDFSOutput implements MessageOutput {
             throws MessageOutputConfigurationException, IOException {
         this.configuration = configuration;
 
-        //ServiceLoader<FileSystem> fileSystems = ServiceLoader.load(FileSystem.class,this.getClass().getClassLoader());
-
         LOG.info("WebHDFSOutput launching...");
 
         String hostname = configuration.getString(CK_HDFS_HOST_NAME);
@@ -69,7 +67,10 @@ public class WebHDFSOutput implements MessageOutput {
         messagesToWrite = new LinkedList<>();
 
 
-        configHadoopPath = configuration.getString(CK_FILE);
+        fileToWrite = configuration.getString(CK_FILE);
+        if(fileToWrite.contains("%")) {
+            fileToWrite = fileToWrite.replaceAll("%","%1\\$t");
+        }
         messageFormat = configuration.getString(CK_MESSAGE_FORMAT);
         flushIntervalInMillis = configuration.getInt(CK_FLUSH_INTERVAL) * 1000;
 
@@ -176,12 +177,16 @@ public class WebHDFSOutput implements MessageOutput {
     }
 
     private String getFormattedPath(Message message) {
-        String formattedPath;
-        if (configHadoopPath.contains("${")) {
-            formattedPath = StrSubstitutor.replace(configHadoopPath, message.getFields());
-        } else {
-            formattedPath = configHadoopPath;
+        String formattedPath = fileToWrite;
+
+        if (fileToWrite.contains("${")) {
+            formattedPath = StrSubstitutor.replace(formattedPath, message.getFields());
         }
+
+        if(fileToWrite.contains("%")) {
+            formattedPath = String.format(formattedPath, message.getTimestamp().toDate());
+        }
+
         return formattedPath;
     }
 

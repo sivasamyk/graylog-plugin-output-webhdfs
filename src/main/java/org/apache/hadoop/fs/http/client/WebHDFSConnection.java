@@ -176,8 +176,6 @@ public class WebHDFSConnection {
      */
     public String getHomeDirectory() throws IOException, AuthenticationException {
         ensureValidToken();
-        //String spec = MessageFormat.format("/webhdfs/v1/?op=GETHOMEDIRECTORY&user.name={0}", this.principal);
-        //HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection("/webhdfs/v1/?op=GETHOMEDIRECTORY");
         conn.connect();
         Response response = result(conn, true);
@@ -199,8 +197,6 @@ public class WebHDFSConnection {
      */
     public String open(String path, OutputStream os) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=OPEN&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=OPEN", URLUtil.encodePath(path)));
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-Type", "application/octet-stream");
@@ -227,8 +223,6 @@ public class WebHDFSConnection {
      */
     public String getContentSummary(String path) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=GETCONTENTSUMMARY&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=GETCONTENTSUMMARY", URLUtil.encodePath(path)));
         conn.setRequestMethod("GET");
         conn.connect();
@@ -251,8 +245,6 @@ public class WebHDFSConnection {
      */
     public String listStatus(String path) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=LISTSTATUS&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=LISTSTATUS", URLUtil.encodePath(path)));
         conn.setRequestMethod("GET");
         conn.connect();
@@ -274,8 +266,6 @@ public class WebHDFSConnection {
      */
     public String getFileStatus(String path) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=GETFILESTATUS&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=LISTSTATUS", URLUtil.encodePath(path)));
         conn.setRequestMethod("GET");
         conn.connect();
@@ -297,8 +287,6 @@ public class WebHDFSConnection {
      */
     public String getFileCheckSum(String path) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=GETFILECHECKSUM&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=GETFILECHECKSUM", URLUtil.encodePath(path)));
         conn.setRequestMethod("GET");
         conn.connect();
@@ -331,11 +319,7 @@ public class WebHDFSConnection {
     public String create(String path, InputStream is) throws IOException,
             AuthenticationException {
         ensureValidToken();
-        //String spec = MessageFormat.format("/webhdfs/v1/{0}?op=CREATE&user.name={1}", URLUtil.encodePath(path), this.principal);
-
         String redirectUrl = null;
-
-        //HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=CREATE", URLUtil.encodePath(path)));
         conn.setRequestMethod("PUT");
         conn.setInstanceFollowRedirects(false);
@@ -388,8 +372,6 @@ public class WebHDFSConnection {
      */
     public String mkdirs(String path) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=MKDIRS&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=MKDIRS", URLUtil.encodePath(path)));
         conn.setRequestMethod("PUT");
         conn.connect();
@@ -413,9 +395,6 @@ public class WebHDFSConnection {
     public String createSymLink(String srcPath, String destPath) throws IOException,
             AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=CREATESYMLINK&destination={1}&user.name={2}",
-//                URLUtil.encodePath(srcPath), URLUtil.encodePath(destPath), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=CREATESYMLINK&destination={1}",
                 URLUtil.encodePath(srcPath),URLUtil.encodePath(destPath)));
         conn.setRequestMethod("PUT");
@@ -440,9 +419,6 @@ public class WebHDFSConnection {
     public String rename(String srcPath, String destPath) throws IOException,
             AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=RENAME&destination={1}&user.name={2}",
-//                URLUtil.encodePath(srcPath), URLUtil.encodePath(destPath), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=RENAME&destination={1}",
                 URLUtil.encodePath(srcPath),URLUtil.encodePath(destPath)));
         conn.setRequestMethod("PUT");
@@ -467,8 +443,6 @@ public class WebHDFSConnection {
      */
     public String setPermission(String path) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=SETPERMISSION&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=SETPERMISSION", URLUtil.encodePath(path)));
         conn.setRequestMethod("PUT");
         conn.connect();
@@ -492,8 +466,6 @@ public class WebHDFSConnection {
      */
     public String setOwner(String path) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=SETOWNER&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=SETOWNER", URLUtil.encodePath(path)));
         conn.setRequestMethod("PUT");
         conn.connect();
@@ -517,8 +489,6 @@ public class WebHDFSConnection {
      */
     public String setReplication(String path) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=SETREPLICATION&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=SETREPLICATION", URLUtil.encodePath(path)));
         conn.setRequestMethod("PUT");
         conn.connect();
@@ -542,8 +512,6 @@ public class WebHDFSConnection {
      */
     public String setTimes(String path) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=SETTIMES&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=SETTIMES", URLUtil.encodePath(path)));
         conn.setRequestMethod("PUT");
         conn.connect();
@@ -573,9 +541,7 @@ public class WebHDFSConnection {
     public String append(String path, InputStream is) throws IOException,
             AuthenticationException {
         ensureValidToken();
-        //String spec = MessageFormat.format("/webhdfs/v1/{0}?op=APPEND&user.name={1}", URLUtil.encodePath(path), this.principal);
         String redirectUrl = null;
-       // HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=APPEND", URLUtil.encodePath(path)));
         conn.setRequestMethod("POST");
         conn.setInstanceFollowRedirects(false);
@@ -634,8 +600,6 @@ public class WebHDFSConnection {
      */
     public String delete(String path) throws IOException, AuthenticationException {
         ensureValidToken();
-//        String spec = MessageFormat.format("/webhdfs/v1/{0}?op=DELETE&user.name={1}", URLUtil.encodePath(path), this.principal);
-//        HttpURLConnection conn = authenticatedURL.openConnection(new URL(new URL(httpfsUrl), spec), token);
         HttpURLConnection conn = getURLConnection(MessageFormat.format("/webhdfs/v1/{0}?op=DELETE", URLUtil.encodePath(path)));
         conn.setRequestMethod("DELETE");
         conn.setInstanceFollowRedirects(false);
