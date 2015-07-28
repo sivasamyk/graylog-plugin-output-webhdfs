@@ -20,5 +20,5 @@ Following parameters can be configured while launching the plugin
 * Message Format - Format of message to be written. Can be formatted with message fields like ${timestamp} | ${source} | ${short_message}
 * Flush interval - Interval in seconds to flush the data to HDFS. Value of 0 means immediate.
 
-![Plugin configuration window] (https://raw.githubusercontent.com/sivasamyk/graylog-plugin-output-webhdfs/master/)
+![Plugin configuration window] (https://github.com/sivasamyk/graylog-plugin-output-webhdfs/raw/master/webhdfs-plugin-config.png)
 
