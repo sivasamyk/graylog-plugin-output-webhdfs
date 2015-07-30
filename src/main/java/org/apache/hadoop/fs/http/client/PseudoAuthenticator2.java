@@ -14,11 +14,7 @@ package org.apache.hadoop.fs.http.client;
  * limitations under the License. See accompanying LICENSE file.
  */
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import org.apache.hadoop.security.authentication.client.*;
+import org.apache.hadoop.security.authentication.client.PseudoAuthenticator;
 
 /**
  * The {@link PseudoAuthenticator} implementation provides an authentication
