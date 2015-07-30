@@ -251,7 +251,7 @@ public class WebHDFSOutput implements MessageOutput {
                             CK_FLUSH_INTERVAL,
                             "Flush Interval",
                             0,
-                            "Flush interval in seconds. Recommended for high throughput outputs. O for immediate update",
+                            "Flush interval in seconds. Recommended for high throughput outputs. 0 for immediate update",
                             ConfigurationField.Optional.NOT_OPTIONAL)
             );
 
