@@ -4,12 +4,12 @@ An output plugin to write messages to Hadoop HDFS over WebHDFS.
 
 Tested with Hadoop 2.7.0.
 
-The WebHDFS implemention uses modified code from [webhdfs-java-client](https://github.com/zxs/webhdfs-java-client).
+The WebHDFS implementation uses modified code from [webhdfs-java-client](https://github.com/zxs/webhdfs-java-client).
 
 Getting started
 ---------------
 
-To start using this plugin place this [jar] (https://github.com/sivasamyk/graylog-plugin-output-webhdfs/raw/master/graylog-plugin-output-webhdfs-1.0.0.jar) in the plugins directory of graylog server. 
+To start using this plugin place this [jar] (https://github.com/sivasamyk/graylog-plugin-output-webhdfs/releases/download/1.0.0/graylog-plugin-output-webhdfs-1.0.0.jar) in the plugins directory and restart graylog server. 
 
 Following parameters can be configured while launching the plugin
 
