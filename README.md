@@ -9,7 +9,7 @@ The WebHDFS implementation uses modified code from [webhdfs-java-client](https:/
 Getting started
 ---------------
 
-To start using this plugin place this [jar] (https://github.com/sivasamyk/graylog-plugin-output-webhdfs/releases/download/1.0.0/graylog-plugin-output-webhdfs-1.0.0.jar) in the plugins directory and restart graylog server. 
+To start using this plugin place this [jar] (https://github.com/sivasamyk/graylog-plugin-output-webhdfs/releases/download/1.0.1/graylog-plugin-output-webhdfs-1.0.1.jar) in the plugins directory and restart graylog server. 
 
 Following parameters can be configured while launching the plugin
 
