@@ -74,10 +74,11 @@ public class WebHDFSOutput implements MessageOutput {
         messageFormat = configuration.getString(CK_MESSAGE_FORMAT);
         flushIntervalInMillis = configuration.getInt(CK_FLUSH_INTERVAL) * 1000;
 
-        flushTimer = new Timer("WebHDFS-Flush-Timer", true);
-        flushTask = createFlushTask();
-
-        flushTimer.schedule(flushTask, flushIntervalInMillis, flushIntervalInMillis);
+        if(flushIntervalInMillis > 0) {
+            flushTimer = new Timer("WebHDFS-Flush-Timer", true);
+            flushTask = createFlushTask();
+            flushTimer.schedule(flushTask, flushIntervalInMillis, flushIntervalInMillis);
+        }
 
         //append = configuration.getBoolean(CK_APPEND);
         isRunning.set(true);
@@ -101,8 +102,12 @@ public class WebHDFSOutput implements MessageOutput {
     @Override
     public void stop() {
         LOG.info("Stopping WebHDFS output...");
-        flushTask.cancel();
-        flushTimer.cancel();
+        if(flushTask != null) {
+            flushTask.cancel();
+        }
+        if(flushTimer != null) {
+            flushTimer.cancel();
+        }
         isRunning.set(false);
     }
 
