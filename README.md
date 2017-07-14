@@ -9,7 +9,7 @@ The WebHDFS implementation uses modified code from [webhdfs-java-client](https:/
 Getting started
 ---------------
 
-To start using this plugin place this [jar] (https://github.com/sivasamyk/graylog-plugin-output-webhdfs/releases/download/1.0.1/graylog-plugin-output-webhdfs-1.0.1.jar) in the plugins directory and restart graylog server. 
+To start using this plugin place this [jar](https://github.com/sivasamyk/graylog-plugin-output-webhdfs/releases/download/1.0.1/graylog-plugin-output-webhdfs-1.0.1.jar) in the plugins directory and restart graylog server. 
 
 Following parameters can be configured while launching the plugin
 
@@ -20,5 +20,5 @@ Following parameters can be configured while launching the plugin
 * Message Format - Format of message to be written. Can be formatted with message fields like ${timestamp} | ${source} | ${short_message}
 * Flush interval - Interval in seconds to flush the data to HDFS. Value of 0 means immediate.
 
-![Plugin configuration window] (https://github.com/sivasamyk/graylog-plugin-output-webhdfs/raw/master/webhdfs-plugin-config.png)
+![Plugin configuration window](https://github.com/sivasamyk/graylog-plugin-output-webhdfs/raw/master/webhdfs-plugin-config.png)
 
